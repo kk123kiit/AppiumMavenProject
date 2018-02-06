@@ -103,9 +103,9 @@ public class AppiumTest extends DriverScript{
 		System.out.println("AmzPrice "+amzPrice);
 		//System.out.println("AmazonItemPrice "+amazonItemPrice);
 		
-		//Check price on FlipKart app
-		FunctionLibrary.startNewDriverSession("flipKartAppCapibility");
+		FunctionLibrary.startNewDriverSession(CONFIG.getProperty("flipKartCap"));
 		
+		//Click on flipkart search bar
 		resultStatus =  FunctionLibrary.clickOnElement(MyLocator.flipkartSearchBar,"Flip Kart Search Bar");
 		if(resultStatus.contains("fail"))
 			return resultStatus;
@@ -113,6 +113,7 @@ public class AppiumTest extends DriverScript{
 		resultStatus = FunctionLibrary.sendKeysToElement(MyLocator.flipkartSearchEditBox, ConstantName.SEARCH_ITEM_NAME, "Flip Kart Search Bar");
 		if(resultStatus.contains("fail"))
 			return resultStatus;
+		
 		//Hit on enter button
 		((AndroidDriver) driver).pressKeyCode(66); 
 		
@@ -132,8 +133,8 @@ public class AppiumTest extends DriverScript{
 		
 		return "Pass: "+testPass;
 	}
-
-
+	
+	//Search item(searching headphone) on flipkart app using different filters
 	public static String applyFlipkartFilter(String itemName) throws InterruptedException {
 		
 		resultStatus =  FunctionLibrary.clickOnElement(MyLocator.flipkartSearchBar,"Flip Kart Search Bar");
@@ -152,7 +153,6 @@ public class AppiumTest extends DriverScript{
 			return resultStatus;
 		
 		//Select category
-		//MobileElement categoryElement = (MobileElement) ((AndroidDriver) driver).findElementByAndroidUIAutomator(MyLocator.category);
 		FunctionLibrary.scrollToElement(pom.categoryElement, ConstantName.CATEGORY, "click");
 		resultStatus = FunctionLibrary.clickOnElement(MyLocator.categoryType, "Headphones");
 		if(resultStatus.contains("fail"))
@@ -171,6 +171,7 @@ public class AppiumTest extends DriverScript{
 		resultStatus = FunctionLibrary.clickOnElement(MyLocator.connectivityType, ConstantName.CONNECTIVITY_TYPE);
 		if(resultStatus.contains("fail"))
 			return resultStatus;
+		
 		resultStatus = FunctionLibrary.clickOnElement(MyLocator.doneButton, ConstantName.DONE_BUTTON);
 		if(resultStatus.contains("fail"))
 			return resultStatus;
@@ -181,6 +182,7 @@ public class AppiumTest extends DriverScript{
 		//Select color
 		FunctionLibrary.scrollToElement(pom.color, ConstantName.COLOR,"click");
 		FunctionLibrary.scrollToElement(pom.colorType, ConstantName.COLOR_TYPE,"click");
+		
 		if(resultStatus.contains("fail"))
 			return resultStatus;
 		resultStatus = FunctionLibrary.clickOnElement(MyLocator.doneButton, ConstantName.DONE_BUTTON);
@@ -192,7 +194,6 @@ public class AppiumTest extends DriverScript{
 		if(resultStatus.contains("fail"))
 			return resultStatus;
 		
-		//((AndroidDriver) driver).findElementByAndroidUIAutomator("").click();		
 		return "Pass: "+testPass;
 	}
 	
